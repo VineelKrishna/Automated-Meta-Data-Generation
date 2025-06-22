@@ -1,0 +1,9 @@
+pdfplumber
+python-docx
+pytesseract
+pillow
+spacy
+keybert
+sentence-transformers
+transformers
+streamlit

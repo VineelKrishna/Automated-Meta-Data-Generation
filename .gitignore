@@ -1,0 +1,8 @@
+metadata_env/
+models/
+__pycache__/
+*.pyc
+*.pkl
+*.log
+.DS_Store
+venv/
