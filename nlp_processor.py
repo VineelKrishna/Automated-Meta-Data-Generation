@@ -1,23 +1,21 @@
 import spacy
 from keybert import KeyBERT
-from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import pipeline
 from sentence_transformers import SentenceTransformer
 import en_core_web_sm
 
 class NLPProcessor:
 
-    def __init__(self, summarizer_path="./models/summarizer_model", sentence_model_path="./models/sentence_transformer_model"):
+    def __init__(self):
         print("Loading spaCy model...")
         self.nlp = en_core_web_sm.load()
 
-        print("Loading KeyBERT model...")
-        self.sentence_model = SentenceTransformer(sentence_model_path)
+        print("Loading SentenceTransformer model from Hugging Face...")
+        self.sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
         self.kw_model = KeyBERT(model=self.sentence_model)
 
-        print("Loading summarization model...")
-        tokenizer = AutoTokenizer.from_pretrained(summarizer_path)
-        model = AutoModelForSeq2SeqLM.from_pretrained(summarizer_path)
-        self.summarizer = pipeline("summarization", model=model, tokenizer=tokenizer)
+        print("Loading summarization model from Hugging Face...")
+        self.summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
 
     def perform_ner(self, text):
         doc = self.nlp(text)
