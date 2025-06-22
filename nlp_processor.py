@@ -15,7 +15,7 @@ class NLPProcessor:
         self.kw_model = KeyBERT(model=self.sentence_model)
 
         print("Loading summarization model from Hugging Face...")
-        self.summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+        self.summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6", device=-1)
 
     def perform_ner(self, text):
         doc = self.nlp(text)
