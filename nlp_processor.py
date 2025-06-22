@@ -2,12 +2,13 @@ import spacy
 from keybert import KeyBERT
 from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 from sentence_transformers import SentenceTransformer
+import en_core_web_sm
 
 class NLPProcessor:
 
     def __init__(self, summarizer_path="./models/summarizer_model", sentence_model_path="./models/sentence_transformer_model"):
         print("Loading spaCy model...")
-        self.nlp = spacy.load("en_core_web_sm")
+        self.nlp = en_core_web_sm.load()
 
         print("Loading KeyBERT model...")
         self.sentence_model = SentenceTransformer(sentence_model_path)
