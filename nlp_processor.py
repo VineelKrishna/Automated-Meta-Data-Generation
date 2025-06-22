@@ -7,7 +7,7 @@ class NLPProcessor:
 
     def __init__(self, summarizer_path="./models/summarizer_model", sentence_model_path="./models/sentence_transformer_model"):
         print("Loading spaCy model...")
-        self.nlp = spacy.load("./models/spacy_model/en_core_web_sm")
+        self.nlp = spacy.load("en_core_web_sm")
 
         print("Loading KeyBERT model...")
         self.sentence_model = SentenceTransformer(sentence_model_path)
