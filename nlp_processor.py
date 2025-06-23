@@ -2,24 +2,21 @@ import spacy
 from keybert import KeyBERT
 from transformers import pipeline, AutoTokenizer, AutoModelForSeq2SeqLM
 from sentence_transformers import SentenceTransformer
-import torch
 
 class NLPProcessor:
 
-    def __init__(self):
+    def __init__(self, summarizer_path="./models/summarizer_model", sentence_model_path="./models/sentence_transformer_model"):
         print("Loading spaCy model...")
-        self.nlp = spacy.load("en_core_web_sm")
+        self.nlp = spacy.load("./models/spacy_model/en_core_web_sm")
 
         print("Loading KeyBERT model...")
-        device = 'cpu'
-        self.sentence_model = SentenceTransformer('all-MiniLM-L6-v2', device=device)
+        self.sentence_model = SentenceTransformer(sentence_model_path)
         self.kw_model = KeyBERT(model=self.sentence_model)
 
         print("Loading summarization model...")
-        summarizer_model = "sshleifer/distilbart-cnn-12-6"
-        tokenizer = AutoTokenizer.from_pretrained(summarizer_model)
-        model = AutoModelForSeq2SeqLM.from_pretrained(summarizer_model)
-        self.summarizer = pipeline("summarization", model=model, tokenizer=tokenizer, device=0 if torch.cuda.is_available() else -1)
+        tokenizer = AutoTokenizer.from_pretrained(summarizer_path)
+        model = AutoModelForSeq2SeqLM.from_pretrained(summarizer_path)
+        self.summarizer = pipeline("summarization", model=model, tokenizer=tokenizer)
 
     def perform_ner(self, text):
         doc = self.nlp(text)

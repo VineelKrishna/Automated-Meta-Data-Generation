@@ -34,6 +34,20 @@ mars_project/
 │
 └── README.md                # Project Documentation
 ```
+---
+
+## ⚠️ Download Pre-trained Models
+
+**Note:**  
+The `models/` folder is **not included** in this repository due to its large size (~1.25 GB).
+
+**To use this project:**
+
+1. Download the pre-trained models from [Google Drive](<https://drive.google.com/drive/folders/1jwXjevHNzD8G7U8ARmi8FiZaoHzBldwY?usp=sharing>).
+2. The Drive link contains three folders: `spacy_model`, `summarizer_model`, and `sentence_transformer_model`.
+3. Create a new folder named `models` at the root of your project.
+4. Place the three downloaded folders inside the `models` directory so the structure matches the one shown above in the Project Structure section.
+
 
 ---
 
@@ -89,8 +103,6 @@ Install all required Python packages using:
 ```bash
 pip install -r requirements.txt
 ```
-
-**⚠ No internet download of models is required. All models are pre-downloaded in `models/` folder.**
 
 ---
 
